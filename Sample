@@ -1,29 +1,30 @@
-R is good for flexible statistical Modeling and parameters estimation. (Valid and reproducible results are achievable.)
-Example 1:
+#R is good for flexible statistical Modeling and parameters estimation. (Valid and # reproducible results are achievable.)
+#Example 1:
 
-R Codes:
+#R Codes:
 # Let the protected well be 'p' and the unprotected well be 'u'
 #an researcher selected two well from each village, A and B.
 #We wish, by MLE concept, shows the possibilities in n=5000 trials.
 
-villageA = c('p','p','p','u','u','u','u','u')
+<villageA = c('p','p','p','u','u','u','u','u')>
 villageB = c('p', 'p','p','p','p','p','u','u')
 event = c() #selecting randomly any well which are unprotected.
-event2= c() #selecting randomly and the well is only in village A
+event2= c() # randomly selecting only one unprotected well in village A
 for(i in 1:5000) {
   first.draw = sample(villageA,2)
   first.draw2= sample(villageB,2)
+  first.draw12=sample(villageA,1)
 newballs = c(villageA,first.draw)
 newballs2=c(villageB,first.draw2)
 second.draw = sample(newballs,1)
-event[i] = (first.draw==c('u','u') && first.draw2==c('u','u'))}
-
-event[i] = (first.draw==c('u','p') && second.draw==c('u','p'))}
-mean(event)
+event[i] = (first.draw==c('u','u') && first.draw2==c('u','u'))
+event2[i] = (first.draw12=='u' && second.draw=="p")}
+prb<-mean(event)
+prb
 summary (event)
 std1<-sd(event)
-print(" 95% confidence Interval + or - ")
-std1*1.96/(5000)^0.5
-
-mean(event2)
+d<-std1*1.96/(5000)^0.5
+print("The 95% confidence Interval for P are ")
+prb - d ; prb + d #
+print(" Probability of randomly selecting only one unprotected well in village A = "); mean(event2)
 summary(event2)
